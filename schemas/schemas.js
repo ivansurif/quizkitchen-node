@@ -9,7 +9,7 @@ const recordSchema = Joi.object({
       context: Joi.string().required(),
       text: Joi.string().required(),
       isReal: Joi.boolean().required(),
-      explanation: Joi.string()
+      explanation: Joi.string().allow('')
     //   source: Joi.string().when('isReal', { is: true, then: Joi.required() })
   }).required(),
   answers: Joi.array().items(
