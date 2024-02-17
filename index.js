@@ -2,11 +2,6 @@ import dotenv from 'dotenv';
 import express, { Router } from 'express';
 import cors from 'cors';
 
-import { extractQuestions } from './router/parseJSONObject.js';
-import { serializeJoiSchema } from './router/convertJoiToJson.js';
-import { recordSchema } from './schemas/schemas.js';
-
-
 dotenv.config({ path: '.env.public' }); // Load public configurations
 dotenv.config({ path: '.env.private' }); // Load private configurations
 
@@ -58,12 +53,6 @@ app.post('/add-questions-manual', async (req, res) => {
     });
 
 
-// app.get('/schema', (req, res) => {
-//     const jsonSchema = serializeJoiSchema(recordSchema);
-//     console.log(jsonSchema);
-//     res.json(jsonSchema);
-// });
-
 app.get('/getQuestion', async (req, res) => {
     try {
         const result = await getRandomRecord(collection, db);
@@ -73,15 +62,6 @@ app.get('/getQuestion', async (req, res) => {
             console.log('Error!');
             console.error(error);
         }});
-
-app.post('/add-questions', (req, res) => {
-    try {
-        extractQuestions(req);
-        res.status(200).send('Questions added successfully');
-    } catch (error) {
-        res.status(500).send('Error getting questions');
-    }
-});
 
 app.use(express.urlencoded({ extended: true }));
 
