@@ -41,7 +41,6 @@ app.post('/add-questions-manual', async (req, res) => {
         const result = await insertRecord(req.body, collection, db);
         res.status(200).json({ message: `Questions added successfully`, details: result });
     } catch (error) {
-        
     if (error.message === 'Data Validation Error') {
         console.log('Data Validation Error Caught');
         res.status(400).json({ error: error.message, details: 'Invalid data provided' });
